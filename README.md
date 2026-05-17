@@ -59,24 +59,23 @@ Simply open `index.html` in any modern browser (no web server required for local
 
 ---
 
+## 🔁 Flow Diagram
+
+```
 flowchart TD
-    A["🧍 User<br>Types fitness query"] --> B["💻 HTML/JS Frontend<br>Captures input"]
-    B --> C["📡 Sends POST to Flask API"]
+    A["🧍 User<br>Types fitness query<br>(e.g. 'suggest workout for back')"] --> B["💻 HTML/JS Frontend<br>Captures input"]
+    B --> C["📡 Sends POST to Flask API<br>with JSON: { question }"]
     C --> D["🌐 Flask Server<br>Receives the request"]
-    D --> E["🧠 Vectorizer<br>Converts input via TF-IDF"]
+    D --> E["🧠 Vectorizer<br>Converts input using TF-IDF"]
     E --> F["🔍 FAISS Index<br>Search top 5 relevant exercises"]
     F --> G["📂 CSV Dataset<br>Returns exercise rows"]
     G --> H["🧾 Prompt Builder<br>Context + Question"]
-    H --> I["🤖 Mistral LLM via Ollama<br>Generates answer"]
-    I --> J["📨 LLM Output<br>Raw response"]
-    J --> K["🧰 Flask API<br>Formats JSON"]
+    H --> I["🤖 Mistral LLM via Ollama<br>Generates natural language answer"]
+    I --> J["📨 LLM Output<br>Raw answer from model"]
+    J --> K["🧰 Flask API<br>Formats response as JSON"]
     K --> L["🖥️ Frontend Receives JSON"]
-    L --> M["💬 Chat UI<br>Displays bot response"]
-
-    %% Styling
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style I fill:#00f,color:#fff,stroke-width:2px
-    style F fill:#00ff00,stroke:#333
+    L --> M["💬 Chat UI<br>Displays bot’s response in chatbox"]
+```
 
 ---
 
